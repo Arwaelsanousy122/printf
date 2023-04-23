@@ -5,7 +5,7 @@
 
 /**
  * _printf - building ower own printf function.
- *
+ *@format: parameter for input format
  * Return: the number of characters printed
  * (excluding the null byte used to end output to strings).
  */
@@ -13,6 +13,7 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
+
 	va_start(args, format);
 	for (*format != '\0')
 	{
@@ -38,10 +39,17 @@ int _printf(const char *format, ...)
 	va_end(args);
 }
 
+/**
+ * main - entry point
+ *
+ * Return: 0
+ */
+
 int main(void)
 {
 	char c = 'A';
 	char str[] = "Hello world!";
-        _printf("character: %c\n, String: %s\n", ,);
-        return (0);
+
+	_printf("character: %c\n, String: %s\n", c, str);
+	return (0);
 }
