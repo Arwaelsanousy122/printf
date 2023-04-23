@@ -1,7 +1,4 @@
-#include <stdarg.h>
 #include "main.h"
-#include <stdout.h>
-#include <stdio.h>
 
 /**
  * _printf - building ower own printf function.
@@ -12,10 +9,11 @@
 
 int _printf(const char *format, ...)
 {
+	int i;
 	va_list args;
 
 	va_start(args, format);
-	for (*format != '\0')
+	for (i = 0; *format != '\0'; i++)
 	{
 		if (*format == '%')
 		{
@@ -29,27 +27,13 @@ int _printf(const char *format, ...)
 				printf("%s", va_arg(args, char*));
 				break;
 		}
+		}
 		else
 		{
 			printf("%c", *format);
 		}
 		format++;
-		}
 	}
 	va_end(args);
-}
-
-/**
- * main - entry point
- *
- * Return: 0
- */
-
-int main(void)
-{
-	char c = 'A';
-	char str[] = "Hello world!";
-
-	_printf("character: %c\n, String: %s\n", c, str);
 	return (0);
 }
