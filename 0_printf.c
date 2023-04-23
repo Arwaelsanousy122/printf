@@ -6,37 +6,45 @@
  * Return: the number of characters printed
  * (excluding the null byte used to end output to strings).
  */
-
 int _printf(const char *format, ...)
 {
-	int i;
+	int count = 0;
 	va_list args;
 
 	va_start(args, format);
-	for (i = 0; *format != '\0'; i++)
+	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
-		format++;
-		switch (*format)
-		{
-			case 'c':
+			format++;
+			if (*format == 'd' || *format == 'i')
+			{
+				printf("%i", va_arg(args, int));
+				count++;
+			}
+			if (*format == 'c')
+			{
 				printf("%c", va_arg(args, int));
-				break;
-			case 's':
+				count++;
+			}
+			if (*format == 's')
+			{
 				printf("%s", va_arg(args, char*));
-				break;
-			case '%':
-				printf("%%", va_arg(args, char*));
-				break;
-		}
+				count++;
+			}
+			if (*format == '%')
+			{
+				printf("%%", va_arg(args, int));
+				count++;
+			}
 		}
 		else
 		{
-			printf("%c", *format);
+			putchar(*format);
+			count++;
 		}
 		format++;
 	}
 	va_end(args);
-	return (0);
+	return (count);
 }
